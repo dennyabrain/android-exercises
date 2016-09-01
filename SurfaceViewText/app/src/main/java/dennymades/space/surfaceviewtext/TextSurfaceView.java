@@ -66,10 +66,17 @@ public class TextSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         sh.addCallback(this);
     }
 
+    public void myDraw(float x,float y){
+        CanvasAsync mCanvasAsync = new CanvasAsync();
+        CompoundObjectForASync obj = new CompoundObjectForASync(sh,x,y);
+        mCanvasAsync.execute(obj);
+    }
+
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         Log.d("Denny", "mouse X :"+String.valueOf(motionEvent.getX())+"mouse Y :"+String.valueOf(motionEvent.getY()));
+        myDraw(motionEvent.getX(), motionEvent.getY());
         return false;
     }
 }
