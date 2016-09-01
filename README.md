@@ -9,3 +9,6 @@ collection of trial and errors with android
    [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/SurfaceViewText)
 3. Overlay Custom SurfaceView from (2) ontop of a Camera Preview. 
    [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/DeprecatedCamOverlayedSurface)
+4. A handy class to make seeking permissions easier.
+   [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/Permissions)
+   
