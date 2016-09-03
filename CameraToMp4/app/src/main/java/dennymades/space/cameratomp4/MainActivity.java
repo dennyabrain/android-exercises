@@ -1,13 +1,21 @@
-package dennymades.space.permissions;
+package dennymades.space.cameratomp4;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.media.CamcorderProfile;
+import android.media.MediaRecorder;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.FrameLayout;
 
+import java.io.IOException;
+
+import util.CameraPreview;
+import util.FileManager;
+import util.MyCamera;
 import util.Permission;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,21 +23,41 @@ public class MainActivity extends AppCompatActivity {
     private String[] permissions = {Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.RECORD_AUDIO};
-    private TextView tv;
-    StringBuilder text;
+
+    private MyCamera mCamera;
+    private CameraPreview mCameraPreview;
+    private MediaRecorder mMediaRecorder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //MyCamera Initialization
+        mCamera = new MyCamera(0);
+
+        // seek permission for camera, external storage and audio recording
         boolean permissionGranted = Permission.checkPermission(this, permissions);
-        if(!permissionGranted){
+        if(permissionGranted){
+            mCamera.setup();
+            mCameraPreview = new CameraPreview(this, mCamera.getNativeCamera());
+        }else{
             Permission.seekPermission(this, permissions, Permission.PERMISSION_ALL);
         }
 
-        tv = (TextView) findViewById(R.id.textView);
-        text = new StringBuilder();
+        //Preview Initialization
+        FrameLayout preview = (FrameLayout) findViewById(R.id.frame_layout_camera_preview);
+        preview.addView(mCameraPreview);
+
+        //MediaRecorder initialization
+        mMediaRecorder = new MediaRecorder();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mCamera.getNativeCamera().stopPreview();
+        mCamera.getNativeCamera().release();
     }
 
     /**
@@ -62,18 +90,50 @@ public class MainActivity extends AppCompatActivity {
             case Permission.PERMISSION_ALL:
                 if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                     Log.d(TAG, "camera permission granted");
-                    text.append("camera permission granted");
+                    //mCamera.open(1);
+                    mCamera.setup();
+                    mCameraPreview = new CameraPreview(this, mCamera.mNativeCamera);
                 }
                 if(grantResults.length>0 && grantResults[1]==PackageManager.PERMISSION_GRANTED){
                     Log.d(TAG, "storage write permission granted");
-                    text.append("\nstorage write permission granted");
                 }
                 if(grantResults.length>0 && grantResults[2]==PackageManager.PERMISSION_GRANTED){
                     Log.d(TAG, "audio permission granted");
-                    text.append("\naudio permission granted");
                 }
-                tv.setText(text.toString());
                 break;
         }
+    }
+
+    public void btnCapture(View v){
+        Log.d(TAG, "capture pressed");
+        mCamera.getNativeCamera().unlock();
+        mMediaRecorder.setCamera(mCamera.getNativeCamera());
+        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+        //Get Camera Profile
+        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+        if(profile==null){
+            Log.d(TAG, "camcoder profile is null");
+            finish();
+        }else{
+            mMediaRecorder.setProfile(profile);
+        }
+        mMediaRecorder.setOutputFile(FileManager.getOutputMediaFile(2).toString()); //2 for video
+        mMediaRecorder.setPreviewDisplay(mCameraPreview.getSurface());
+        try {
+            mMediaRecorder.prepare();
+        } catch (IOException e) {
+            Log.d(TAG, "IOException ",e);
+        } catch(IllegalStateException e){
+            Log.d(TAG, "Illegal State Exception ",e);
+        }
+        mMediaRecorder.start();
+    }
+
+    public void btnStop(View v){
+        Log.d(TAG, "stop pressed");
+        mMediaRecorder.stop();
+        mMediaRecorder.release();
+        mCamera.getNativeCamera().lock();
     }
 }

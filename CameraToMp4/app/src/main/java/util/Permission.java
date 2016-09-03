@@ -5,13 +5,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.widget.TextView;
 
 /**
  * Created by abrain on 9/1/16.
  */
 public class Permission {
-    public static final int PERMISSION_ALL=0;
+    public static final int PERMISSION_ALL=3;
 
     public static boolean checkPermission(Context context,String[] permissions){
         for(String permission:permissions) {
