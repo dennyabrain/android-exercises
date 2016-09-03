@@ -1,6 +1,11 @@
 # android-exercises
 collection of trial and errors with android
 
+# View On Instagram
+I am running an instagram account to share snapshots of the mini apps in this repo.
+[![Do Androids Dream Of Me](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](://www.instagram.com/doandroidsdreamofme/)
+
+
 # Index
 
 1. Camera Preview using the deprecated camera API.
@@ -11,4 +16,5 @@ collection of trial and errors with android
    [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/DeprecatedCamOverlayedSurface)
 4. A handy class to make seeking permissions easier.
    [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/Permissions)
-   
+5. CameraToMp4 : using the deprecated Camera API and the Media Recorder Class to save video from camera.
+   [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/CameraToMp4)   
