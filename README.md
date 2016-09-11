@@ -18,3 +18,5 @@ I am running an instagram account to share snapshots of the mini apps in this re
    [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/Permissions)
 5. CameraToMp4 : using the deprecated Camera API and the Media Recorder Class to save video from camera.
    [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/CameraToMp4)   
+6. GrafikaBaseMp4Encoder. Camera sends frame to a GLSurfaceView. Graphics are overlayed on it and encoded as a mp4 video.
+   [App Source Code](https://github.com/dennyabrain/android-exercises/tree/master/Camera-GLSurfaceView-Mp4)
