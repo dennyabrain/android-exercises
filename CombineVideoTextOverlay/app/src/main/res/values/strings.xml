@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CombineVideoTextOverlay</string>
+    <string name="play_button_text">Play Video</string>
+    <string name="locked60fps_checkbox">60 fps</string>
+    <string name="loopPlayback_checkbox">Loop</string>
+    <string name="stop_button_text">stop</string>
+</resources>
