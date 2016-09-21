@@ -29,6 +29,8 @@ import javax.microedition.khronos.opengles.GL10;
 import Encoder.TextureMovieEncoder;
 import util.FileManager;
 
+import Text.Text;
+
 /**
  * Created by abrain on 9/8/16.
  */
@@ -69,6 +71,9 @@ public class MyGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Rend
     int camera_width;
     int camera_height;
 
+    //Text Overlay Stuff
+    public static Text mText;
+
     public MyGLSurfaceView(Context context) {
         super(context);
         mContext = context;
@@ -105,6 +110,7 @@ public class MyGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Rend
 
     @Override
     public synchronized void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        mText = new Text(mContext);
         //load and compile shader
         Log.d("Denny", "SurfaceCreated");
         mTriangle = new Triangle(new float[]{(float)Math.random(),(float)Math.random(),(float)Math.random()},
@@ -212,6 +218,7 @@ public class MyGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Rend
             }
         }
         if(beginRecording==true){
+            //mVideoEncoder.startRecording(new TextureMovieEncoder.EncoderConfig(mOutpuFile, camera_width, camera_height, 4607406, EGL14.eglGetCurrentContext()));
             mVideoEncoder.startRecording(new TextureMovieEncoder.EncoderConfig(mOutpuFile, camera_width, camera_height, 4607406, EGL14.eglGetCurrentContext()));
             beginRecording=false;
         }

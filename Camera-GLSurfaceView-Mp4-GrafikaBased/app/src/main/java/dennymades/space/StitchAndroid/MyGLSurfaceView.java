@@ -1,4 +1,4 @@
-package dennymades.space.CameraGLSurfaceViewMp4GrafikaBased;
+package dennymades.space.StitchAndroid;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -209,10 +209,7 @@ public class MyGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Rend
                 updateTexture=false;
             }
         }
-        if(beginRecording==true){
-            mVideoEncoder.startRecording(new TextureMovieEncoder.EncoderConfig(mOutpuFile, camera_width, camera_height, 4607406, EGL14.eglGetCurrentContext()));
-            beginRecording=false;
-        }
+
         //render the texture to FBO if new frame is available
         //GLES20.glViewport(0, 0, mWidth, mHeight);
 
@@ -235,6 +232,10 @@ public class MyGLSurfaceView extends GLSurfaceView implements GLSurfaceView.Rend
         mTriangle.draw();
         GLES20.glFlush();
         mVideoEncoder.setTextureId(mTextureId);// randome number for now
+        if(beginRecording==true){
+            mVideoEncoder.startRecording(new TextureMovieEncoder.EncoderConfig(mOutpuFile, camera_width, camera_height, 4607406, EGL14.eglGetCurrentContext()));
+            beginRecording=false;
+        }
     }
 
     private void renderQuad(int aPosition){

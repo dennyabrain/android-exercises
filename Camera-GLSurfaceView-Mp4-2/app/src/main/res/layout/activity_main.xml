@@ -23,4 +23,20 @@ android:layout_height="match_parent">
         android:onClick="btnRecord"
         android:layout_gravity="left|bottom" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flip camera"
+        android:id="@+id/button3"
+        android:layout_gravity="left|top" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text"
+        android:id="@+id/button4"
+        android:layout_gravity="right|top" />
+
 </FrameLayout>

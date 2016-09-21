@@ -1,4 +1,4 @@
-package dennymades.space.CameraGLSurfaceViewMp4GrafikaBased;
+package dennymades.space.StitchAndroid;
 
 import android.content.Context;
 import android.opengl.GLES20;

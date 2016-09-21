@@ -1,4 +1,4 @@
-package dennymades.space.CameraGLSurfaceViewMp4GrafikaBased;
+package dennymades.space.StitchAndroid;
 
 /**
  * Created by abrain on 9/8/16.

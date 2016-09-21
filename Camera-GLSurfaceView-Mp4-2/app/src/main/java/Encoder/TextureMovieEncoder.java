@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 import dennymades.space.CameraGLSurfaceViewMp42.MainActivity;
+import dennymades.space.CameraGLSurfaceViewMp42.MyGLSurfaceView;
 
 /**
  * Encode a movie from frames rendered from an external texture image.
@@ -330,6 +331,7 @@ public class TextureMovieEncoder implements Runnable {
         mFullScreen.drawFrame(mTextureId, transform);
 
         drawBox(mFrameNum++);
+        drawText();
 
         mInputWindowSurface.setPresentationTime(timestampNanos);
         mInputWindowSurface.swapBuffers();
@@ -419,5 +421,9 @@ public class TextureMovieEncoder implements Runnable {
         GLES20.glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         GLES20.glDisable(GLES20.GL_SCISSOR_TEST);
+    }
+
+    private void drawText(){
+        MyGLSurfaceView.mText.drawText();
     }
 }

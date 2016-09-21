@@ -1,4 +1,4 @@
-package dennymades.space.CameraGLSurfaceViewMp4GrafikaBased;
+package dennymades.space.StitchAndroid;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -16,11 +16,6 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.RECORD_AUDIO};
 
-    public static Mp4Encoder encoder;
-
-    //private MyCamera mCamera;
-    //private CameraPreview mCameraPreview;
-    //private MediaRecorder mMediaRecorder;
     private MyGLSurfaceView mRenderer;
 
     @Override
